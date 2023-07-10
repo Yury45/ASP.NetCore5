@@ -28,8 +28,10 @@ namespace DotNetCore5
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseStaticFiles();
+            app.UseStatusCodePages();
+            app.UseRouting();
 
-            if (env.IsDevelopment())
+            if (env.IsDevelopment()|| env.IsStaging())
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -55,7 +57,7 @@ namespace DotNetCore5
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync($"Page not found!");
+                await context.Response.WriteAsync($"Page not found");
             });
         }
 
